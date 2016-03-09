@@ -19,6 +19,9 @@ class PhotosViewController: UIViewController,UITableViewDelegate,UITableViewData
         // Do any additional setup after loading the view, typically from a nib.
         fetchData()
         tableView.rowHeight = 320
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector("refreshControlAction:"), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.addSubview(refreshControl)
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,6 +52,11 @@ class PhotosViewController: UIViewController,UITableViewDelegate,UITableViewData
         });
         task.resume()
 
+    }
+    
+    func refreshControlAction(refreshControl:UIRefreshControl){
+        fetchData()
+        refreshControl.endRefreshing()
     }
     
     
