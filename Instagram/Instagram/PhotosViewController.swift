@@ -62,16 +62,55 @@ class PhotosViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return listData.count ?? 0
+        return 1
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return listData.count ?? 0
+    }
 
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        headerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        
+        let profileView = UIImageView(frame: CGRect(x: 10, y: 10, width: 30, height: 30))
+        profileView.clipsToBounds = true
+        profileView.layer.cornerRadius = 15;
+        profileView.layer.borderColor = UIColor(white: 0.7, alpha: 0.8).CGColor
+        profileView.layer.borderWidth = 1;
+        
+        if listData.count > 0 {
+            // Use the section number to get the right URL
+            let urlStr:String = (listData[section]["user"]?["profile_picture"] as? String)!
+            let url = NSURL(string: urlStr)
+            profileView.setImageWithURL(url!)
+            
+            headerView.addSubview(profileView)
+            
+            // Add a UILabel for the username here)
+            let usernameLabel = UILabel(frame: CGRect(x:60, y: 0, width: 260, height: 50))
+            let username = listData[section]["user"]?["username"] as? String
+            usernameLabel.text = username
+            
+            headerView.addSubview(usernameLabel)
+        }
+        
+        return headerView
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! dataCell
-        let urlStr:String = (listData[indexPath.row]["images"]?["low_resolution"]?!["url"] as? String)!
-        let url = NSURL(string: urlStr)
-        cell.dataImage.setImageWithURL(url!)
+        if listData.count > 0 {
+            let urlStr:String = (listData[indexPath.section]["images"]?["low_resolution"]?!["url"] as? String)!
+            let url = NSURL(string: urlStr)
+            cell.dataImage.setImageWithURL(url!)
+        }
+        
         return cell
         
     }
