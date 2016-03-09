@@ -7,15 +7,18 @@
 //
 
 import UIKit
+import AFNetworking
 
-class PhotosViewController: UIViewController {
+class PhotosViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
-    var listData: [NSDictionary]?
+    @IBOutlet weak var tableView: UITableView!
+    var listData: [NSDictionary] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         fetchData()
+        tableView.rowHeight = 320
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,12 +42,30 @@ class PhotosViewController: UIViewController {
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
                         data, options:[]) as? NSDictionary {
                             NSLog("response: \(responseDictionary)")
-                            self.listData = responseDictionary["data"] as? [NSDictionary]
+                            self.listData = (responseDictionary["data"] as? [NSDictionary])!
+                            self.tableView.reloadData()
                     }
                 }
         });
         task.resume()
 
+    }
+    
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return listData.count ?? 0
+    }
+    
+
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! dataCell
+        let urlStr:String = (listData[indexPath.row]["images"]?["low_resolution"]?!["url"] as? String)!
+        let url = NSURL(string: urlStr)
+        cell.dataImage.setImageWithURL(url!)
+        return cell
+        
     }
 
 }

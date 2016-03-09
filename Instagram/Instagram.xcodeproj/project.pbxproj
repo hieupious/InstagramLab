@@ -13,6 +13,7 @@
 		D8921B7A1C90508700498675 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8921B781C90508700498675 /* Main.storyboard */; };
 		D8921B7C1C90508700498675 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8921B7B1C90508700498675 /* Assets.xcassets */; };
 		D8921B7F1C90508700498675 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8921B7D1C90508700498675 /* LaunchScreen.storyboard */; };
+		D8921B871C9053B600498675 /* dataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8921B861C9053B600498675 /* dataCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		D8921B7B1C90508700498675 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D8921B7E1C90508700498675 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D8921B801C90508700498675 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8921B861C9053B600498675 /* dataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataCell.swift; sourceTree = "<group>"; };
 		E39EC178568329180B02BBB1 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,6 +77,7 @@
 				D8921B7B1C90508700498675 /* Assets.xcassets */,
 				D8921B7D1C90508700498675 /* LaunchScreen.storyboard */,
 				D8921B801C90508700498675 /* Info.plist */,
+				D8921B861C9053B600498675 /* dataCell.swift */,
 			);
 			path = Instagram;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8921B871C9053B600498675 /* dataCell.swift in Sources */,
 				D8921B771C90508700498675 /* PhotosViewController.swift in Sources */,
 				D8921B751C90508700498675 /* AppDelegate.swift in Sources */,
 			);
