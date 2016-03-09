@@ -9,7 +9,7 @@
 import UIKit
 import AFNetworking
 
-class PhotosViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class PhotosViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UINavigationControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var listData: [NSDictionary] = []
@@ -66,6 +66,15 @@ class PhotosViewController: UIViewController,UITableViewDelegate,UITableViewData
         cell.dataImage.setImageWithURL(url!)
         return cell
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("hello")
+        var vc = segue.destinationViewController as! PhotoDetailsViewController
+        var indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
+        let urlStr:String = (listData[indexPath!.row]["images"]?["low_resolution"]?!["url"] as? String)!
+        let url = NSURL(string: urlStr)
+        vc.url = url
     }
 
 }
